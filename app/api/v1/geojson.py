@@ -9,11 +9,14 @@ api = Redprint('geojson')
 def geojson():
     extent = request.args.get("extent")
     if not extent:
+        print("extent empty")
         return jsonify("")
     extentArr = extent.split(',')
+    print(extentArr)
     if len(extentArr) != 4:
         return jsonify("")
     if float(extentArr[2]) - float(extentArr[0]) > 0.05 or float(extentArr[3]) - float(extentArr[1]) > 0.04:
+        print("extent too large")
         return jsonify("")
 
     sql = '''SELECT
